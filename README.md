@@ -71,3 +71,9 @@ Lasagna was made for programming students for whom PHP, SQL, HTML and CSS are ne
 - Using a templating engine for the views would be good, but when you're still confusing HTML and PHP, functions and variables&hellip; this can wait
 - No configuration
 - Easy setup (copy and paste files)
+
+#### To do
+
+- Document functions
+- Replace global var in view.php with Singleton?
+- .htaccess to hide lasagna/ dir
