@@ -30,14 +30,7 @@ Then use the example files as a basis for your own model, view and controller fi
 
 ## Writing controller and view files
 
-Within controller files, set view values using `\view\set()`, like this:
-
-```
-\view\set("lang", "en");
-\view\set("title", "A lasagna with three layers of pasta: M, V and C");
-```
-
-Then call `\view\display()` to display the view. This will look for a matching `.tpl` file inside `html/`. For example, if the controller file is here:
+Within controller files, call `\view\display()` to display the view. If the first parameter (`$path`) is not specified, this will look for a matching `.tpl` file inside `html/`. For example, if the controller file is here:
 
 ```
 htdocs/
@@ -55,7 +48,17 @@ htdocs/
                 rss.tpl
 ```
 
-Notice that the directory structure of the controller is the same structure used to find the template file.
+Values are passed to the view file either using `\view\set()` or passing an associative array as the second parameter to `\view\display()`. For example, using the `\view\set()` function:
+
+```
+\view\set('title', 'More power to us!');
+```
+
+Alternatively, passing the values via `\view\display()`,
+
+```
+\view\display($path, array('title' => 'More power to us!'));
+```
 
 ## History
 
@@ -68,7 +71,7 @@ Lasagna was made for programming students for whom PHP, SQL, HTML and CSS are ne
 - Make it procedural (not everyone knows about classes)
 - Use namespaces to clearly demarcate this code from the standard PHP libraries
 - Using try-catch isn't justified when most of the standard libraries don't use it
-- Using a templating engine for the views would be good, but when you're still confusing HTML and PHP, functions and variables&hellip; this can wait
+- Using a template engine for the views would be good, but when you're still confusing HTML and PHP, functions and variables&hellip; this can wait
 - No configuration
 - Easy setup (copy and paste files)
 

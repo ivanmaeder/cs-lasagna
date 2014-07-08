@@ -5,9 +5,10 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/lasagna/sql/example_table.php');
 
 $rows = \sql\example_table\fetchAll();
 
-\view\set('title', 'Some of my favourite programmers');
-\view\set('authors', $rows);
+$parameters = array('title' => 'Some of my favourite programmers',
+    'authors' => $rows
+);
 
-\view\display();
+\view\display('lasagna/html/example.tpl', $parameters);
 
 ?>
