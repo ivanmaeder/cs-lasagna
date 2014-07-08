@@ -10,21 +10,27 @@ function set($key, $value) {
     $_lasagna_display_vars[$key] = $value;
 }
 
-function display() {
-    $path = pathinfo($_SERVER['SCRIPT_NAME']);
-    $tpl = dirname(__FILE__) . '/html' . $path['dirname'] . '/' . $path['filename'] . '.tpl';
+function display($path = NULL, $parameters = NULL) {
+    if (!$path) {
+        $info = pathinfo($_SERVER['SCRIPT_NAME']);
+        $path = dirname(__FILE__) . '/html' . $info['dirname'] . '/' . $info['filename'] . '.tpl';
+    }
 
-    if (!file_exists($tpl)) {
-        trigger_error("Unable to display $tpl; file not found");
+    if (!file_exists($path)) {
+        trigger_error("Unable to display $path; file not found");
 
         return;
     }
 
-    global $_lasagna_display_vars;
+    if (!$parameters) {
+        global $_lasagna_display_vars;
 
-    extract($_lasagna_display_vars, EXTR_OVERWRITE);
+        $parameters = $_lasagna_display_vars;
+    }
 
-    include($tpl);
+    extract($parameters, EXTR_OVERWRITE);
+
+    include($path);
 }
 
 ?>
